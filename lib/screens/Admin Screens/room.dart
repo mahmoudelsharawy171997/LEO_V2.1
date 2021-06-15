@@ -5,8 +5,8 @@ import 'package:leo_v1/widgets/footer.dart';
 import 'package:leo_v1/widgets/outputData.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import '../constants.dart';
-import 'info.dart';
+import '../../constants.dart';
+import '../Client Screens/info.dart';
 
 class Room extends StatefulWidget {
   String result;

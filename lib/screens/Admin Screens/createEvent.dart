@@ -3,49 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:leo_v1/widgets/footer.dart';
-import '../constants.dart';
+import '../../constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-import 'AdminEventsScreen.dart';
-
-class ModifyEvent extends StatefulWidget {
-
-  final String id;
-  final String title;
-  final String location;
-  final String description;
-
-
-  const ModifyEvent({Key key, this.title, this.location, this.description,@required this.id,}) : super(key: key);
-
+class CreateEvent extends StatefulWidget {
   @override
-  _ModifyEventState createState() => _ModifyEventState();
+  _CreateEventState createState() => _CreateEventState();
 }
 
-class _ModifyEventState extends State<ModifyEvent> {
+class _CreateEventState extends State<CreateEvent> {
   bool processing = false;
   File _file;
   final _formKey = GlobalKey<FormState>();
-  String id;
-  String title;
-  String location;
-  String description;
-  TextEditingController  titleController;
-  TextEditingController  locationController;
-  TextEditingController  descriptionController;
+  String title, location, description;
   final timeController = TextEditingController();
   final dateController = TextEditingController();
   var jsonResponse;
-
-  @override
-  void initState() {
-    super.initState();
-    id=widget.id;
-    titleController = new TextEditingController(text: widget.title);
-    locationController = new TextEditingController(text: widget.location);
-    descriptionController = new TextEditingController(text: widget.description);
-  }
 
   _openGallary(BuildContext context) async {
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -55,7 +29,7 @@ class _ModifyEventState extends State<ModifyEvent> {
     print(_file.path);
   }
 
-  Future modifyEvent() async {
+  Future addEvent() async {
     setState(() {
       processing = true;
     });
@@ -70,9 +44,8 @@ class _ModifyEventState extends State<ModifyEvent> {
     String base64 = convert.base64Encode(_file.readAsBytesSync());
     String imagename = _file.path.split("/").last;
     print(imagename);
-    var url = "https://www.leotunisia.tn/updateevent.php";
+    var url = "https://www.leotunisia.tn/insetevent.php";
     var data = {
-      "id": id,
       "titre": title,
       "lieu": location,
       "date": dateController.text,
@@ -90,10 +63,6 @@ class _ModifyEventState extends State<ModifyEvent> {
     if(jsonResponse==true){
       Fluttertoast.showToast(
           msg: "Success", toastLength: Toast.LENGTH_SHORT);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => AdminEventsScreen()),
-      );
     }
     if(jsonResponse==false){
       Fluttertoast.showToast(
@@ -101,12 +70,13 @@ class _ModifyEventState extends State<ModifyEvent> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title: Text('modifier un événement'),
+          title: Text('créer un événement'),
           backgroundColor: mainColor,
           elevation: 0,
           leading: IconButton(
@@ -138,7 +108,6 @@ class _ModifyEventState extends State<ModifyEvent> {
                     ),
                     TextFormField(
                       style: TextStyle(color: Colors.black),
-                      controller: titleController,
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'this field requred!';
@@ -150,7 +119,7 @@ class _ModifyEventState extends State<ModifyEvent> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: mainColor, width: 2),
                           borderRadius: BorderRadius.circular(10.0),
@@ -181,7 +150,6 @@ class _ModifyEventState extends State<ModifyEvent> {
                       ),
                     ),
                     TextFormField(
-                      controller: locationController,
                       style: TextStyle(color: Colors.black),
                       validator: (value) {
                         if (value.isEmpty) {
@@ -194,7 +162,7 @@ class _ModifyEventState extends State<ModifyEvent> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: mainColor, width: 2),
                           borderRadius: BorderRadius.circular(10.0),
@@ -248,7 +216,6 @@ class _ModifyEventState extends State<ModifyEvent> {
                       ),
                     ),
                     TextFormField(
-                      controller: descriptionController,
                       maxLines: 5,
                       style: TextStyle(color: Colors.black),
                       validator: (value) {
@@ -262,7 +229,7 @@ class _ModifyEventState extends State<ModifyEvent> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: mainColor, width: 2),
                           borderRadius: BorderRadius.circular(10.0),
@@ -295,11 +262,12 @@ class _ModifyEventState extends State<ModifyEvent> {
                           print(dateController.text);
                           print(timeController.text);
                           print(description);
-                          modifyEvent();
+                          addEvent();
+                          //uploadEvent();
                         }
                       },
                       child: Text(
-                        'modifier',
+                        'creer',
                         style: TextStyle(
                           fontSize: 20,
                         ),
@@ -372,7 +340,7 @@ class DateTimeInput extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               contentPadding:
-              EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: mainColor, width: 2),
                 borderRadius: BorderRadius.circular(10.0),

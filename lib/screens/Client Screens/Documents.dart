@@ -6,7 +6,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:leo_v1/widgets/footer.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
 
 

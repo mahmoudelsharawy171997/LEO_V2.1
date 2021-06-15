@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:leo_v1/widgets/AdminListElement.dart';
-import '../constants.dart';
+import 'package:leo_v1/widgets/listElement.dart';
+import '../../constants.dart';
 
-class AdminEventsScreen extends StatefulWidget {
+class EventsScreen extends StatefulWidget {
   @override
-  _AdminEventsScreenState createState() => _AdminEventsScreenState();
+  _EventsScreenState createState() => _EventsScreenState();
 }
 
-class _AdminEventsScreenState extends State<AdminEventsScreen> {
+class _EventsScreenState extends State<EventsScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +29,7 @@ class _AdminEventsScreenState extends State<AdminEventsScreen> {
             ),
             onPressed: () => Navigator.pop(context),
           )),
-      body: Container(
-        child: AdminEventsListView(),
-      ),
+      body: EventsListView(),
     );
   }
 }

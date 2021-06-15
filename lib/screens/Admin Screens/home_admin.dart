@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:leo_v1/constants.dart';
-import 'package:leo_v1/screens/AdminEventsScreen.dart';
+import 'package:leo_v1/screens/Admin%20Screens/AdminEventsScreen.dart';
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:leo_v1/screens/room.dart';
+import 'package:leo_v1/screens/Admin%20Screens/room.dart';
 import 'package:leo_v1/widgets/footer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
