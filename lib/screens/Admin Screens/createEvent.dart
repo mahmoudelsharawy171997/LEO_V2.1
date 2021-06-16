@@ -280,10 +280,10 @@ class _CreateEventState extends State<CreateEvent> {
                     backgroundColor: Colors.white,
                   ),
                   IconButton(
+                    iconSize: 35,
                       icon: Icon(
                         Icons.camera_alt,
                         color: mainColor,
-                        size: 40,
                       ),
                       onPressed: () {
                         _openGallary(context);

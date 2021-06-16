@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leo_v1/screens/login.dart';
-
 import '../constants.dart';
+
 class footer extends StatelessWidget {
   const footer({
     Key key,

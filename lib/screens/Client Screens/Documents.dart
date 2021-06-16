@@ -105,20 +105,23 @@ class _DocumentsState extends State<Documents> {
             child: Container(
               margin: EdgeInsets.fromLTRB(30, 30, 30, 30),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'File 1',
-                        style: TextStyle(
-                          fontSize: 25,
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.5,
+                        child: Text(
+                          'Lordre-du-jour-de-la-reunion-de-cloture-Convention2k21.pdf',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                       Container(
                         alignment: Alignment.topRight,
-                        width: MediaQuery.of(context).size.width*0.5,
+                        width: MediaQuery.of(context).size.width*0.3,
                         child: loading
                             ? Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -161,15 +164,18 @@ class _DocumentsState extends State<Documents> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'File 2',
-                        style: TextStyle(
-                          fontSize: 25,
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.5,
+                        child: Text(
+                          'Lordre-du-jour-de-la-reunion-douverture-Convention-2k21.pdf',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                       Container(
                         alignment: Alignment.topRight,
-                        width: MediaQuery.of(context).size.width*0.5,
+                        width: MediaQuery.of(context).size.width*0.3,
                         child: loading2
                             ? Padding(
                           padding: const EdgeInsets.all(8.0),

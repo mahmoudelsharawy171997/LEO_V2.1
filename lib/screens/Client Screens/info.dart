@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leo_v1/widgets/footer.dart';
 import 'package:leo_v1/widgets/outputData.dart';
-
 import '../../constants.dart';
 
 class info extends StatelessWidget {

@@ -166,7 +166,7 @@ class _logInState extends State<logIn> {
                           color: Colors.white,
                           fontSize: 20,
                         ),
-                        labelText: 'Mot de pasee',
+                        labelText: 'Mot de passe',
                         focusedBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.grey[300], width: 2.5),

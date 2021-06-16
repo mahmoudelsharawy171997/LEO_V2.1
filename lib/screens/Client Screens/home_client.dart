@@ -4,7 +4,6 @@ import 'package:leo_v1/classes/MemberInfo.dart';
 import 'package:leo_v1/screens/Client%20Screens/qrCode.dart';
 import 'package:leo_v1/widgets/circleButton.dart';
 import 'package:leo_v1/widgets/footer.dart';
-
 import '../../constants.dart';
 import 'Documents.dart';
 import 'EventsScreen.dart';

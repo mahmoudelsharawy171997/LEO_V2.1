@@ -60,14 +60,14 @@ class _SwitchWidgetState extends State<SwitchWidget> {
               currTask,
               'To Do Notification',
               'Attend the event',
-              priority: Priority.Max,
-              importance: Importance.Max,
+              priority: Priority.max,
+              importance: Importance.max,
               playSound: true,
               enableVibration: true,);
 
             var iOSPlatformChannelSpecifics = IOSNotificationDetails();
             NotificationDetails platformChannelSpecifics = NotificationDetails(
-                androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+                android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
             await flutterLocalNotificationsPlugin.schedule(
                 id,
                 'Event reminder',
