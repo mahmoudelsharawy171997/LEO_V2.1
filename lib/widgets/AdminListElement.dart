@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:leo_v1/screens/Admin%20Screens/AdminEventsScreen.dart';
 import 'package:leo_v1/screens/Admin%20Screens/ModifyEvent.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'dart:convert' as convert;
 class Events {
   final String id;
   final String titre;
@@ -110,6 +112,7 @@ class AdminListElement extends StatefulWidget {
 }
 
 class _AdminListElementState extends State<AdminListElement> {
+  var jsonResponse;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -165,32 +168,69 @@ class _AdminListElementState extends State<AdminListElement> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: InkWell(
-                      child: Text(
-                        'modifier',
-                        style: TextStyle(
-                            color: Colors.cyan, fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10,right: 20),
+                        child: InkWell(
+                          child: Text(
+                            'supprimer',
+                            style: TextStyle(
+                                color: Colors.cyan, fontWeight: FontWeight.bold),
+                          ),
+                          onTap: () async {
+                            var url = "https://www.leotunisia.tn/deleteevent.php";
+                            var data = {
+                              "id": widget.id,
+                            };
+                            var response = await http.post(url, body: data);
+                            jsonResponse = convert.jsonDecode(response.body);
+                            print('this is $jsonResponse');
+
+                            if(jsonResponse==true){
+                              Fluttertoast.showToast(
+                                  msg: "Success", toastLength: Toast.LENGTH_SHORT);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (_) => AdminEventsScreen()),
+                              );
+                            }
+                            if(jsonResponse==false){
+                              Fluttertoast.showToast(
+                                  msg: "Failed", toastLength: Toast.LENGTH_SHORT);
+                            }
+                          },
+                        ),
                       ),
-                      onTap: () {
-                        print(widget.id);
-                        print(widget.title);
-                        print(widget.location);
-                        print(widget.description);
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => ModifyEvent(
-                                    id: widget.id,
-                                    title: widget.title,
-                                    location: widget.location,
-                                    description: widget.description,
-                                  )),
-                        );
-                      },
-                    ),
-                  )
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: InkWell(
+                          child: Text(
+                            'modifier',
+                            style: TextStyle(
+                                color: Colors.cyan, fontWeight: FontWeight.bold),
+                          ),
+                          onTap: () {
+                            print(widget.id);
+                            print(widget.title);
+                            print(widget.location);
+                            print(widget.description);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => ModifyEvent(
+                                        id: widget.id,
+                                        title: widget.title,
+                                        location: widget.location,
+                                        description: widget.description,
+                                      )),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+
                 ],
               ),
             ),
